@@ -1,9 +1,15 @@
 package com.example.android.guesstheword.screens.score
 
+import androidx.lifecycle.LiveData
+import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
 
-class ScoreViewModel(var finalScore: Int) : ViewModel() {
+class ScoreViewModel(finalScore: Int) : ViewModel() {
+    val score: LiveData<Int>
+        get() = _score
+
+    private val _score = MutableLiveData(finalScore)
 
     class Factory(private var finalScore: Int) : ViewModelProvider.Factory {
         override fun <T : ViewModel?> create(modelClass: Class<T>): T {
