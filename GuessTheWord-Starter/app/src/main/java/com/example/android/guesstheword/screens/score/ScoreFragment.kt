@@ -59,10 +59,7 @@ class ScoreFragment : Fragment() {
                 false
         )
         binding.scoreViewModel = viewModel
-
-        viewModel.score.observe(viewLifecycleOwner, Observer { score ->
-            binding.scoreText.text = score.toString()
-        })
+        binding.lifecycleOwner = viewLifecycleOwner
 
         return binding.root
     }
