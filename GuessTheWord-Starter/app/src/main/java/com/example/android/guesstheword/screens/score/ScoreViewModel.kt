@@ -11,6 +11,19 @@ class ScoreViewModel(finalScore: Int) : ViewModel() {
 
     private val _score = MutableLiveData(finalScore)
 
+    val eventPlayAgain: LiveData<Boolean>
+        get() = _eventPlayAgain
+
+    private val _eventPlayAgain = MutableLiveData(false)
+
+    fun onPlayAgain() {
+        _eventPlayAgain.value = true
+    }
+
+    fun onPlayAgainComplete() {
+        _eventPlayAgain.value = false
+    }
+
     class Factory(private var finalScore: Int) : ViewModelProvider.Factory {
         override fun <T : ViewModel?> create(modelClass: Class<T>): T {
             if (modelClass.isAssignableFrom(ScoreViewModel::class.java)) {
@@ -18,6 +31,5 @@ class ScoreViewModel(finalScore: Int) : ViewModel() {
             }
             throw IllegalArgumentException("Unknown viewModel class")
         }
-
     }
 }

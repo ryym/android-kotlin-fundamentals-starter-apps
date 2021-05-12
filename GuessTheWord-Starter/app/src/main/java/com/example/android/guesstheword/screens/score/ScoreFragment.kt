@@ -44,6 +44,13 @@ class ScoreFragment : Fragment() {
         viewModelFactory = ScoreViewModel.Factory(args.score)
         viewModel = ViewModelProvider(this, viewModelFactory).get(ScoreViewModel::class.java)
 
+        viewModel.eventPlayAgain.observe(viewLifecycleOwner, Observer { playAgain ->
+            if (playAgain) {
+                findNavController().navigate(ScoreFragmentDirections.actionRestart())
+                viewModel.onPlayAgainComplete()
+            }
+        })
+
         // Inflate view and obtain an instance of the binding class.
         val binding: ScoreFragmentBinding = DataBindingUtil.inflate(
                 inflater,
@@ -52,13 +59,11 @@ class ScoreFragment : Fragment() {
                 false
         )
 
+        binding.playAgainButton.setOnClickListener { viewModel.onPlayAgain() }
+
         viewModel.score.observe(viewLifecycleOwner, Observer { score ->
             binding.scoreText.text = score.toString()
         })
-
-        binding.playAgainButton.setOnClickListener {
-            findNavController().navigate(ScoreFragmentDirections.actionRestart())
-        }
 
         return binding.root
     }
