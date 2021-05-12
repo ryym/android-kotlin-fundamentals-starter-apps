@@ -47,8 +47,13 @@ class GameFragment : Fragment() {
         viewModel.score.observe(viewLifecycleOwner, Observer { score ->
             binding.scoreText.text = score.toString()
         })
+
         viewModel.word.observe(viewLifecycleOwner, Observer { word ->
             binding.wordText.text = word
+        })
+
+        viewModel.isGameFinished.observe(viewLifecycleOwner, Observer { hasFinished ->
+            if (hasFinished) gameFinished()
         })
 
         // Inflate view and obtain an instance of the binding class
@@ -85,5 +90,6 @@ class GameFragment : Fragment() {
         val action = GameFragmentDirections.actionGameToScore()
         action.score = viewModel.score.value ?: 0
         findNavController().navigate(action)
+        viewModel.onGameFinishComplete()
     }
 }
