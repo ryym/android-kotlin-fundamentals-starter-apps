@@ -58,8 +58,7 @@ class ScoreFragment : Fragment() {
                 container,
                 false
         )
-
-        binding.playAgainButton.setOnClickListener { viewModel.onPlayAgain() }
+        binding.scoreViewModel = viewModel
 
         viewModel.score.observe(viewLifecycleOwner, Observer { score ->
             binding.scoreText.text = score.toString()
