@@ -21,8 +21,11 @@ import android.content.res.Resources
 import android.os.Build
 import android.text.Html
 import android.text.Spanned
+import android.widget.TextView
+import androidx.recyclerview.widget.RecyclerView
 import com.example.android.trackmysleepquality.database.SleepNight
 import java.text.SimpleDateFormat
+
 //import java.util.concurrent.TimeUnit
 //import java.util.*
 
@@ -48,7 +51,6 @@ import java.text.SimpleDateFormat
 //        }
 //    }
 //}
-
 
 
 /**
@@ -132,5 +134,8 @@ fun formatNights(nights: List<SleepNight>, resources: Resources): Spanned {
         @Suppress("DEPRECATION")
         return Html.fromHtml(sb.toString())
     }
+
 }
+
+class TextItemViewHolder(val textView: TextView) : RecyclerView.ViewHolder(textView)
 
